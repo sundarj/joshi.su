@@ -1,0 +1,14 @@
+@charset "utf-8";
+@import "https://cdnjs.cloudflare.com/ajax/libs/normalize/3.0.2/normalize.min.css";
+@import "http://fonts.googleapis.com/css?family=Noto+Serif:400,700)";
+
+html { box-sizing: border-box; height: 100% }
+*, *::before, *::after { box-sizing: inherit }
+
+body {
+    font: normal 100%/1.4 'Noto Serif', Georgia, serif;
+    background: #fafafa;
+    color: #1f1f1f;
+    height: 100%;
+    margin: 0;
+}

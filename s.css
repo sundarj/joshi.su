@@ -1,0 +1,61 @@
+@import url(http://fonts.googleapis.com/css?family=Cutive+Mono);
+
+.site-head {
+    height: 100%;
+    width: 128px;
+    background: url(i/jsu.png) no-repeat 1em 1em;
+    background-size: 64px;
+    position: relative;
+}
+.site-head * { margin: 0 }
+.site-head h1 {
+    position: relative;
+    left: -999px;
+}
+.site-head, main { display: inline-block; vertical-align: top; }
+
+main {
+    padding: 10%;
+    width: calc(100% - 128px);
+}
+.wrought a {
+    color: inherit;
+    text-decoration: none;
+    display: block;
+    padding: 1.5em 0;
+}
+.wrought h2 { margin: 0 }
+.wrought {
+    color: #999992;
+    text-align: center;
+    display: inline-block;
+    width: 50%;
+    vertical-align: middle;
+    padding: 1em 0;
+    font-family: 'Cutive Mono', Consolas, monospace;
+    -webkit-transition: background .4s ease-in-out;
+    transition: background .4s ease-in-out;
+}
+.wrought:hover {
+    background: #1f262e;
+    color: ghostwhite;
+}
+
+main hr {
+    border-bottom-color: black;
+    width: 25%;
+}
+
+
+@media screen and (max-width: 60em) {
+    .site-head, main { display: block; width: 100% }
+    
+    .site-head {
+        height: 128px;
+        background-position: 50% 50%;
+    }
+    main { padding: 5% }
+    .wrought {
+        width: 100%;   
+    }
+}
