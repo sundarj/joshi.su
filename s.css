@@ -1,22 +1,19 @@
 @import url(http://fonts.googleapis.com/css?family=Cutive+Mono);
 
 .site-head {
-    height: 100%;
-    width: 128px;
     background: url(i/jsu.png) no-repeat 1em 1em;
     background-size: 64px;
-    position: relative;
+    width: 128px;
+    height: 128px;
 }
 .site-head * { margin: 0 }
 .site-head h1 {
     position: relative;
     left: -999px;
 }
-.site-head, main { display: inline-block; vertical-align: top; }
 
 main {
     padding: 10%;
-    width: calc(100% - 128px);
 }
 .wrought a {
     color: inherit;
@@ -31,10 +28,11 @@ main {
     display: inline-block;
     width: 50%;
     vertical-align: middle;
-    padding: 1em 0;
+    padding: 2em 0;
     font-family: 'Cutive Mono', Consolas, monospace;
     -webkit-transition: background .4s ease-in-out;
     transition: background .4s ease-in-out;
+    letter-spacing: .02em;
 }
 .wrought:hover {
     background: #1f262e;
@@ -48,10 +46,9 @@ main hr {
 
 
 @media screen and (max-width: 60em) {
-    .site-head, main { display: block; width: 100% }
+    .site-head { width: 100% }
     
     .site-head {
-        height: 128px;
         background-position: 50% 50%;
     }
     main { padding: 5% }
