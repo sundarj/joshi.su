@@ -1,17 +1,5 @@
 @import url(http://fonts.googleapis.com/css?family=Cutive+Mono);
 
-.site-head {
-    background: url(i/jsu.svg) no-repeat 1em 1em;
-    background-size: 64px;
-    width: 128px;
-    height: 128px;
-}
-.site-head * { margin: 0 }
-.site-head h1 {
-    position: relative;
-    left: -999px;
-}
-
 main {
     padding: 10%;
 }
@@ -23,7 +11,7 @@ main {
 }
 .wrought h2 { margin: 0 }
 .wrought {
-    color: #999992;
+    color: #1f1f1f;
     text-align: center;
     display: inline-block;
     width: 50%;
@@ -38,8 +26,8 @@ main {
     color: ghostwhite;
 }
 .wrought:hover a {
-    -webkit-animation: float 2.8s cubic-bezier(0.250, 0.460, 0.450, 0.940) infinite alternate;
-    animation: float 2.8s cubic-bezier(0.250, 0.460, 0.450, 0.940) infinite alternate;
+    -webkit-animation: float 1.2s cubic-bezier(0.390, 0.575, 0.565, 1.000) infinite alternate;
+    animation: float 1.2s cubic-bezier(0.390, 0.575, 0.565, 1.000) infinite alternate;
 }
 
 main hr {
@@ -48,16 +36,16 @@ main hr {
 }
 
 .modal {
-    position: fixed;
+    position: absolute;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
-    background: #f2f2e8;
-    color: black;
     transform: scale(.5);
     opacity: 0;
     z-index: -1;
+    background: #f2f2e8;
+    margin-top: 128px;
 }
 
 .modal.is {

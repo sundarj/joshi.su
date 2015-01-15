@@ -7,10 +7,26 @@ html { box-sizing: border-box; height: 100% }
 
 body {
     font: normal 100%/1.4 'Noto Serif', Georgia, serif;
-    background: #fafafa;
+    background: #f2f2e8;
     color: #1f1f1f;
     height: 100%;
-    margin: 0;
+}
+
+.site-head {
+    background: url(i/jsu.svg) no-repeat 1em 1em;
+    background-size: 64px;
+    width: 128px;
+    height: 128px;
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 50;
+}
+.site-head * { margin: 0 }
+.site-head a { display: block; height: 100% }
+.site-head h1 {
+    position: relative;
+    left: -999px;
 }
 
 ::selection {

@@ -45,7 +45,7 @@
         this.listen(evt, function(e) {
             if (e.target && e.target.nodeName === sel.toUpperCase())
                 lst();
-            });
+        });
     };
     
 })(document)
