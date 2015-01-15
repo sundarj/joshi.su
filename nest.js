@@ -11,7 +11,7 @@
                 el.classList.add(dot);
             else
                 el.classList += (el.classList.indexOf(dot) != -1 ? dot : '');
-                return el;
+            return el;
             }
         el.removeClass = function(dot) {
             if (el.classList)
