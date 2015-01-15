@@ -7,16 +7,18 @@
     
     function extendDOM(el) {
         el.addClass = function(dot) {
-                   if (el.classList)
-                       el.classList.add(dot);
-                   else
-                       el.classList += (el.classList.indexOf(dot) != -1 ? dot : '');
-               }
+            if (el.classList)
+                el.classList.add(dot);
+            else
+                el.classList += (el.classList.indexOf(dot) != -1 ? dot : '');
+                return el;
+            }
         el.removeClass = function(dot) {
             if (el.classList)
                 el.classList.remove(dot);
             else
                 el.className = el.className.replace(dot, '');
+            return el;
         }
     };
     
