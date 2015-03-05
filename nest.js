@@ -22,16 +22,28 @@
         }
     };
     
-    nest.qs = function(sel, cb) {
-        if (typeof cb == 'undefined') {
-            var elem = [].slice.call(document.querySelectorAll(sel));
+    nest.qs = function(sel, cb, pad) {
+        var d;
+        if (typeof sel === 'object') {
+            d = sel;
+            sel = cb;
+            cb = pad;
+        } else {
+            d = window.document;   
+        }
+        if (cb == undefined) {
+            var elem = [].slice.call(d.querySelectorAll(sel));
             elem.map(extendDOM);
             return elem.length === 1 ? elem[0] : elem;
         }
         var t = (''+cb).match(/\([a-z]+\)/)[0].replace(/[\(\)]/g,'');
-        [].forEach.call(document.querySelectorAll(sel), function(el) {
+        [].forEach.call(d.querySelectorAll(sel), function(el) {
             el.addEventListener(t, cb);
         });
+    };
+    
+    HTMLElement.prototype.qs = function(sel, cb) {
+        return nest.qs(this, sel, cb);
     };
     
     EventTarget.prototype.listen = function(evt, lst, cpt) {
@@ -41,11 +53,11 @@
         });
     };
 
-    EventTarget.prototype.delegate = function(evt, sel, lst) {
+    EventTarget.prototype.delegate = function(evt, sel, lst, cpt) {
         this.listen(evt, function(e) {
             if (e.target && e.target.nodeName === sel.toUpperCase())
-                lst();
-        });
+                lst.call(e.target, e);
+        }, cpt);
     };
     
 })(document)
