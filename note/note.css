@@ -84,7 +84,7 @@ output {
         pointer-events: all;
     }
 
-    .selected input { font-size: 2em; font-weight: bold; margin-top: 1em }
+    .selected input { font-size: 2em; font-weight: bold; margin-top: 1em; }
 
 
 ::selection {
