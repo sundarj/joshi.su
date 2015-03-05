@@ -1,3 +1,5 @@
+"use strict";
+
 var Tome = {};
 var output = nest.qs('output');
 var agent = nest.qs('.agent');
@@ -37,10 +39,9 @@ function create(c) {
     Tome[page.id] = {};
     page.className = 'page';
     
-    inner = document.createElement('div');
+    var inner = document.createElement('textarea');
     inner.className = 'page-inner';
-    inner.contentEditable = true;
-    inner.innerHTML = c.content;
+    inner.value = c.content;
     inner.listen('dblclick', function(e) {
         e.preventDefault();
         this.parentNode.classList.remove('selected');
@@ -62,11 +63,11 @@ function save_content() {
         if (ps.forEach) {
             ps.forEach(function(page) {
                 Tome[page.id].title = page.qs('input').value;
-                Tome[page.id].content = page.qs('.page-inner').innerHTML.replace(/<div>/g, '\n').replace(/<\/div>|<br>/g, '');
+                Tome[page.id].content = page.qs('.page-inner').value;
             });
         } else {
             Tome[ps.id].title = ps.qs('input').value;
-            Tome[ps.id].content = ps.qs('.page-inner').innerHTML.replace(/<div>/g, '\n').replace(/<\/div>|<br>/g, '');
+            Tome[ps.id].content = ps.qs('.page-inner').value;
         }
     }
     

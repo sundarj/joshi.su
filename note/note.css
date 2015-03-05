@@ -56,7 +56,15 @@ output {
         font-weight: bold;
     }
 
-.page-inner { opacity: 0; transition: opacity 0s 0s; }
+.page-inner {
+    opacity: 0;
+    transition: opacity 0s 0s;
+    pointer-events: none;
+    display: block;
+    width: 100%;
+    height: 100%;
+    resize: none;
+}
 
 .page.selected {
     width: 100%;
@@ -73,6 +81,7 @@ output {
         padding: 2em;
         transition: opacity 0s 0.5s;
         cursor: text;
+        pointer-events: all;
     }
 
     .selected input { font-size: 2em; font-weight: bold; margin-top: 1em }
