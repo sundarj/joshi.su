@@ -117,13 +117,8 @@ window.listen("keydown", function(e) {
                     chicken_little();
                     Tome = JSON.parse(e.target.result);
                     localStorage["json.note"] = Tome;
-                    for (var page in Tome) {
-                        create({
-                            id: page,
-                            title: Tome[page].title,
-                            content: Tome[page].content
-                        });
-                    };
+                    window.removeEventListener('onbeforeunload');
+                    window.location.reload(true);
                 }
                 var opened = reader.readAsText(this.files[0]);
             });
