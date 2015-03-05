@@ -102,3 +102,32 @@ window.listen('beforeunload', function() {
     save_content();
     localStorage['jsu.note'] = JSON.stringify(Tome);
 });
+
+window.listen("keydown", function(e) {
+   if (e.ctrlKey) {
+       var which = String.fromCharCode(e.which);
+       if ( which === 'S') {
+           e.preventDefault();
+           saveAs(new Blob([JSON.stringify(Tome)], {type: "text/plain,charset=utf-8"}), "notes.json");
+       } else if (which === 'O') {
+            e.preventDefault();
+            nest.qs('.file-open', function(change) {
+                var reader = new FileReader();
+                reader.onload = function(e) {
+                    chicken_little();
+                    Tome = JSON.parse(e.target.result);
+                    localStorage["json.note"] = Tome;
+                    for (var page in Tome) {
+                        create({
+                            id: page,
+                            title: Tome[page].title,
+                            content: Tome[page].content
+                        });
+                    };
+                }
+                var opened = reader.readAsText(this.files[0]);
+            });
+            nest.qs('.file-open').click();
+       }
+   }
+});
