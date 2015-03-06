@@ -1,6 +1,6 @@
 "use strict";
 
-var Tome = {};
+var Tome = Tome || {};
 var output = nest.qs('output');
 var agent = nest.qs('.agent');
 
@@ -108,6 +108,7 @@ window.listen("keydown", function(e) {
        var which = String.fromCharCode(e.which);
        if ( which === 'S') {
            e.preventDefault();
+           Tome = localStorage["jsu.note"];
            saveAs(new Blob([JSON.stringify(Tome)], {type: "text/plain,charset=utf-8"}), "notes.json");
        } else if (which === 'O') {
             e.preventDefault();
@@ -116,7 +117,7 @@ window.listen("keydown", function(e) {
                 reader.onload = function(e) {
                     chicken_little();
                     Tome = JSON.parse(e.target.result);
-                    localStorage["json.note"] = Tome;
+                    localStorage["jsu.note"] = Tome;
                     window.removeEventListener('onbeforeunload');
                     window.location.reload(true);
                 }
