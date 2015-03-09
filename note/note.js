@@ -70,8 +70,7 @@ function save_content() {
             Tome[ps.id].content = ps.qs('.page-inner').value;
         }
     }
-    
-    
+    localStorage['jsu.note'] = JSON.stringify(Tome);
 }
 
 agent.listen('click', function(e) {
@@ -101,6 +100,7 @@ window.listen('load', function() {
 window.listen('beforeunload', function() {
     save_content();
     localStorage['jsu.note'] = JSON.stringify(Tome);
+    return null;
 });
 
 window.listen("keydown", function(e) {
