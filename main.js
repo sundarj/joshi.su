@@ -1,6 +1,6 @@
 "use strict";
 
-var modal = nest.qs('.modal');
+var view = nest.qs('.view');
 
 function 歴史(href, replace) {
     var hrefstate = href.split("/");
@@ -9,11 +9,13 @@ function 歴史(href, replace) {
     history[replace]({
         url: hrefstate
     }, null, href);
-    var req = new XMLHttpRequest();
+    view.addClass('is');
+    view.src = href;
+    /*var req = new XMLHttpRequest();
     req.open("GET", href, false);
     req.send();
-    modal.addClass('is');
-    modal.innerHTML = req.responseText;
+    
+    modal.innerHTML = req.responseText;*/
 }
 
 nest.qs('a:not(.ignore-me)', function(click) {
@@ -25,8 +27,8 @@ nest.qs('a:not(.ignore-me)', function(click) {
 
 window.listen('popstate', function(e) {
     if (e.state && e.state.url === '/') {
-        modal.innerHTML = '';
-        modal.removeClass('is');
+        view.src = '';
+        view.removeClass('is');
         
     } else
         歴史(e.state.url, true);

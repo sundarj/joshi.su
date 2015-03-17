@@ -35,7 +35,7 @@ main hr {
     width: 25%;
 }
 
-.modal {
+.view {
     position: absolute;
     top: 0;
     left: 0;
@@ -48,7 +48,7 @@ main hr {
     margin-top: 128px;
 }
 
-.modal.is {
+.view.is {
     transform: scale(1);
     opacity: 1;
     z-index: 2;
@@ -93,7 +93,7 @@ main hr {
     .site-head {
         background-position: 50% 50%;
     }
-    main { padding: 5% }
+    main { padding: 120px 5% }
     .wrought {
         width: 100%;   
     }

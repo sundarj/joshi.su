@@ -62,10 +62,12 @@ function save_content() {
     if (ps) {
         if (ps.forEach) {
             ps.forEach(function(page) {
+                Tome[page.id] = {};
                 Tome[page.id].title = page.qs('input').value;
                 Tome[page.id].content = page.qs('.page-inner').value;
             });
         } else {
+            Tome[ps.id] = {};
             Tome[ps.id].title = ps.qs('input').value;
             Tome[ps.id].content = ps.qs('.page-inner').value;
         }
