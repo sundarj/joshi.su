@@ -59,6 +59,7 @@ function create(c) {
 
 function save_content() {
     var ps = nest.qs('.page');
+    chicken_little();
     if (ps) {
         if (ps.forEach) {
             ps.forEach(function(page) {
