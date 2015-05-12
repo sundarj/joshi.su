@@ -9,7 +9,7 @@ body {
     font: normal 100%/1.4 'Noto Serif', Georgia, serif;
     background: #f2f2e8;
     color: #1f1f1f;
-    height: 100%;
+    min-height: 100%;
 }
 
 .site-head {

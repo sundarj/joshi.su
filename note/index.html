@@ -1,20 +1,29 @@
 <!doctype html>
 <html lang="en">
 <head>
-        <meta charset="utf-8">
-        <title>of note</title>
-        <link rel="stylesheet" href="/b.css">
-        <link rel="stylesheet" href="note.css">
-        <link href='http://fonts.googleapis.com/css?family=Noto+Serif' rel='stylesheet' type='text/css'>
-        <script src="/nest.js"></script>
-        <script src="saveas.js"></script>
+    <meta charset="utf-8">
+    <title>of note</title>
+    <link rel="stylesheet" href="/b.css">
+    <link rel="stylesheet" href="note.css">
+    <link href='http://fonts.googleapis.com/css?family=Noto+Serif' rel='stylesheet' type='text/css'>
 </head>
 <body>
-    <output>
-        <button class="agent" data-action="create">+</button>
+    
+    <aside class="notepad">
+        <ul class="notepad-contents"></ul>
+        <button class="creator">+</button>
+    </aside>
+    
+    <output class="hidden">
+        <input type="text" class="note-title">
+        <textarea class="note-page"></textarea>
     </output>
     
+    <script src="/nest.js"></script>
+    <script src="saveas.js"></script>
+    <script src="localforage.min.js"></script>
     <script src="note.js"></script>
     <input accept=".json" class="file-open" type="file" style="display: none">
+    
 </body>
 </html>

@@ -1,8 +1,41 @@
 (function(document, undefined) {
     this.nest = {};
-    /* stolen from _ */
-    nest.has = function(obj, key) {
+    this.nest._ = {};
+    
+    nest._.has = function(obj, key) {
         return obj != null && ({}).hasOwnProperty.call(obj, key);
+    };
+    
+    nest._.debounce = function(func, wait, immediate) {
+        var timeout, args, context, timestamp, result;
+
+        var later = function() {
+            var last = Date.now() - timestamp;
+
+            if (last < wait && last >= 0) {
+                timeout = setTimeout(later, wait - last);
+            } else {
+                timeout = null;
+                if (!immediate) {
+                    result = func.apply(context, args);
+                    if (!timeout) context = args = null;
+                }
+            }
+        };
+
+        return function() {
+            context = this;
+            args = arguments;
+            timestamp = Date.now();
+            var callNow = immediate && !timeout;
+            if (!timeout) timeout = setTimeout(later, wait);
+            if (callNow) {
+                result = func.apply(context, args);
+                context = args = null;
+            }
+
+            return result;
+        };
     };
     
     function extendDOM(el) {
@@ -21,6 +54,18 @@
             return el;
         }
     };
+    
+    nest.console = function(entry) {
+        return {
+            log: console.log.bind(console, entry),
+            info: console.info.bind(console, entry),
+            error: console.error.bind(console, entry)
+        }
+    }
+    
+    nest.obj = function(proto) {
+        return Object.create(proto || null);
+    }
     
     nest.qs = function(sel, cb, pad) {
         var d;
@@ -48,6 +93,16 @@
     
     EventTarget.prototype.listen = function(evt, lst, cpt) {
         var self = this;
+        
+        if (typeof lst === 'number') {
+            return {
+                then: function(fn) {
+                    nest.oldval = self.value || self.textContent;
+                    self.addEventListener(evt, nest._.debounce(fn, lst), cpt);
+                }
+            }
+        };
+        
         [].map.call(''.split.call(evt, ','), function(e) {
             self.addEventListener(e, lst, cpt);
         });
