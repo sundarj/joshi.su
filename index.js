@@ -9,4 +9,4 @@ app.get('/', function(req, res, next) {
 
 app.use(compression());
 app.use(express.static(__dirname));
-app.listen(8080);
+app.listen(1337);
