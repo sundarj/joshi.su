@@ -10,17 +10,41 @@ body, output, .note-page {
 }
 
 .notepad, output { 
-    padding: 6% 3.5em;
-    display: flex;
-    flex-flow: column nowrap;
+    padding: 4em 3.5em;
 }
+    .notepad *, output * { display: block }
 
 .notepad {
     width: 40%;
     min-height: 100%;
+    font-size: 1.4em;
 }
 
-    .notepad-contents { margin: 0; padding: 0 }
+    .notepad-contents {
+        margin: 0;
+        padding: 0
+    }
+        .notepad-contents li {
+            margin: 1em 0;
+            cursor: pointer;
+            background: #f8f8f3;
+            padding: .5em;
+            border-radius: 2px;
+            box-shadow: 0 0 1px 1px rgba(0,0,0,0.188);
+            position: relative;
+        }
+            .notepad-contents li:hover .× { opacity: 1 }
+
+            .× {
+                position: absolute;
+                right: 0;
+                top: 0;
+                bottom: 0;
+                margin: auto;
+                opacity: 0;
+                transition: opacity .5s;
+                color: #9fafaf;
+            }
 
 output {
     width: 60%;
@@ -33,6 +57,25 @@ output {
         background: none;
         outline: none;
         margin: 1em 0;
+        width: 100%;
+    }
+
+    .note-page {
+        resize: none;
+        line-height: 1.4;
+    }
+
+    .note-title {
+        font-size: 1.3em;
+        text-shadow: 0px 0px 1px;
+        border-left: .2em solid #cfdfdf;
+        padding-left: .5em;
     }
 
 .hidden * { display: none }
+
+.creator {
+    background: #3f3f3f;
+    color: #f2f2e8;
+    padding: .25em .5em;
+}

@@ -37,3 +37,10 @@ body {
 input::selection {
     background: rgba(82, 179, 217, 0.5);
 }
+
+button {
+    outline: 0;
+    border: 0;
+    background: none;
+    border-radius: 2px;
+}

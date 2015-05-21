@@ -38,6 +38,10 @@
         };
     };
     
+    nest.each = function(o, fn) {
+        Object.keys(o).forEach(fn);
+    };
+    
     function extendDOM(el) {
         el.addClass = function(dot) {
             if (el.classList)
@@ -61,10 +65,6 @@
             info: console.info.bind(console, entry),
             error: console.error.bind(console, entry)
         }
-    }
-    
-    nest.obj = function(proto) {
-        return Object.create(proto || null);
     }
     
     nest.qs = function(sel, cb, pad) {
@@ -114,5 +114,99 @@
                 lst.call(e.target, e);
         }, cpt);
     };
+    
+    nest.key = function (keydir, context) {
+
+        keydir = keydir || 'keydown';
+        context = context || window;
+
+        var mod;
+
+        var upon = function (key) {
+            return {
+                upon: function (fn) {
+                    context.addEventListener(keydir, function (e) {
+                        if (e[mod]) {
+                            if (String.fromCharCode(e.which) === key.toUpperCase()) {
+                                e.preventDefault();
+                                fn();
+                            }
+                        }
+                    });
+                }
+            };
+        };
+
+        return {
+            ctrl: function (key) {
+                mod = 'ctrlKey';
+                return upon(key);
+            },
+            alt: function(key) {
+                mod = 'altKey';
+                return upon(key);
+            },
+            shift: function(key) {
+                mod = 'shiftKey';
+                return upon(key);
+            }
+        };
+
+    };
+    
+        EventTarget.prototype.key = function(keydir) {
+            return nest.key(keydir, this)   
+        }
+        
+        nest.keys = function(map, keydir) {
+            nest.each(map, function(mod) {
+                nest.each(map[mod], function(key) {
+                    nest.key()[mod](key).upon(map[mod][key]); 
+                });
+            });
+        }
+        
+    /*function r(method, file, data, fn, header) {
+        if (typeof data === 'function') {
+            header = fn;
+            fn = data;
+        }
+        var req = new XMLHttpRequest();
+        req.open(method, file, true);
+        header = ({
+            json: 'application/json',
+            urlencoded: 'application/x-www-form-urlencoded',
+            formdata: 'multipart/formdata'
+        })[header] || 'text/plain';
+        req.setRequestHeader('Content-Type', header + ';charset=utf-8');
+        req.onreadystatechange = function () {
+            if (req.readyState === 4 && req.status === 200) {
+                fn && fn.call(req);
+            }
+        }
+        if (fn) {
+            req.send(data);
+        } else {
+            req.send();
+        }
+    }
+    
+        nest.get = function(f, d, fn, h) {
+            return r("get", f, d, fn, h);
+        }
+        nest.post = function(f, d, fn, h) {
+            return r("post", f, d, fn, h);   
+        }
+        nest.json = function() {
+            function jsonHeader(m) {
+                return function(f, fn) {
+                    return m.call(null, f, fn, 'json'); 
+                };
+            }
+            return {
+                get: jsonHeader(nest.get),
+                post: jsonHeader(nest.post)
+            }
+        }*/
     
 })(document)
