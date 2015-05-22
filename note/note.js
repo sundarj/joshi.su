@@ -12,11 +12,13 @@ var dom = {
     notePage: nest.qs('.note-page'),
     noteContents: nest.qs('.notepad-contents'),
     noteCreator: nest.qs('.creator'),
+    noteDestroyer: nest.qs('.×'),
     output: nest.qs('output'),
     file: nest.qs('.file-open'),
     id: function() {
         return (new Date * Math.random()).toString(36).replace(/\./g,'');
-    }
+    },
+    order: []
 };
 
 function chicken_little() {
@@ -49,9 +51,7 @@ var noveau = {
             var li = document.createElement('li');
             li.dataset.to = id;
             li.textContent = Tome[id].title;
-            var close = document.createElement('button');
-            close.textContent = close.className = '×';
-            li.appendChild(close);
+            li.draggable = true;
             dom.noteContents.appendChild(li);
         } else {
             existing[0].textContent = Tome[id].title;
@@ -77,30 +77,62 @@ dom.output.listen('input', 1000).then(function() {
 dom.noteCreator.listen('click', noveau.page);
 
 localforage.iterate(function(content, key) {
+    if (key==='order') return;
     Tome[key] = {
         title: content.title,
         content: content.content
     };
-    noveau.index(key);
-    localforage.length().then(dom.id);
 }).then(function() {
     console.info('initialised');
     
-    var latest = document.querySelector('[data-to="'+localStorage["jsu.note.latest"]+'"]');
+    localforage.length().then(dom.id);
+    
+    localforage.getItem("order").then(function(order) {
+        order = order || [];
+        order.forEach(function(id) {
+           noveau.index(id); 
+        });
+        var latest = document.querySelector('[data-to="'+localStorage["jsu.note.latest"]+'"]');
     latest && latest.click();
+    });
     
     nest.qs('.×', function(click) {
-        localforage.removeItem(this.parentNode.dataset.to);
-        this.parentNode.remove();
+        localforage.removeItem(cur);
+        document.querySelector('[data-to="'+cur+'"]').remove();
+        dom.noteTitle.value = dom.notePage.value = '';
+        delete dom.order[dom.order.indexOf(cur)];
+        localforage.removeItem("order");
     });
 });
 
-window.onbeforeunload = function() {
+dom.noteContents.listen('dragover', function(e) { e.preventDefault() });
+dom.noteContents.delegate('dragstart', 'li', function(e) {
+   e.dataTransfer.setData("text", e.target.dataset.to);
+});
+
+function swapElements(a, b) {
+    var temp = document.createElement("div");
+    a.parentNode.insertBefore(temp, a);
+    b.parentNode.insertBefore(a, b);
+    temp.parentNode.insertBefore(b, temp);
+    temp.parentNode.removeChild(temp);
+}
+
+dom.noteContents.listen('drop', function(e) {
+    swapElements(e.target, document.querySelector('[data-to="'+e.dataTransfer.getData("text")+'"]'));
+});
+
+
+window.listen('beforeunload', function() {
     nest.each(Tome, function(id) {
            if (Tome[id].title === dom.noteTitle.value)
                localStorage["jsu.note.latest"] = id;
-    })
-}
+    });
+    nest.qs('.notepad-contents li').forEach(function(note) {
+       dom.order.push(note.dataset.to);
+    });
+    localforage.setItem("order", dom.order);
+})
 
 dom.file.listen('change', function(e) {
     var reader = new FileReader();

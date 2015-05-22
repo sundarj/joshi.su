@@ -1,23 +1,25 @@
 body {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100%;
+    background: #f8f8f3;
+    overflow: hidden;
 }
 
-body, output, .note-page {
-    height: 100%;
+output, .notepad *, output * {
+    display: block
 }
 
-.notepad, output { 
-    padding: 4em 3.5em;
+main { position: absolute; height: 100%; width: 100% }
+
+aside, output { 
+    display: inline-block;
+    vertical-align: top;
+    min-height: 100%;
+    padding: 2em 3em;
 }
-    .notepad *, output * { display: block }
 
 .notepad {
-    width: 40%;
-    min-height: 100%;
     font-size: 1.4em;
+    width: 33.33333%;
+    background: #f2f2e8;
 }
 
     .notepad-contents {
@@ -33,36 +35,31 @@ body, output, .note-page {
             box-shadow: 0 0 1px 1px rgba(0,0,0,0.188);
             position: relative;
         }
-            .notepad-contents li:hover .× { opacity: 1 }
-
-            .× {
-                position: absolute;
-                right: 0;
-                top: 0;
-                bottom: 0;
-                margin: auto;
-                opacity: 0;
-                transition: opacity .5s;
-                color: #9fafaf;
-            }
 
 output {
-    width: 60%;
-    background: #f8f8f3;
     font-size: 1.3em;
+    position: relative;
+    width: 66.66666%;
 }
 
     .note-page, .note-title {
         border: 0;
         background: none;
         outline: none;
-        margin: 1em 0;
         width: 100%;
     }
 
     .note-page {
         resize: none;
         line-height: 1.4;
+        margin-top: 2em;
+        position: absolute;
+        top: 8em;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        margin: auto;
+        padding: 0 3em 3em 3em;
     }
 
     .note-title {
@@ -70,7 +67,18 @@ output {
         text-shadow: 0px 0px 1px;
         border-left: .2em solid #cfdfdf;
         padding-left: .5em;
+        margin-top: 1em;
     }
+
+    .× {
+        color: #9fafaf;
+        position: absolute;
+        top: .5em;
+        right: .5em;
+    }
+        .×:hover {
+            color: #1f1f1f;   
+        }
 
 .hidden * { display: none }
 
