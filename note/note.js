@@ -44,17 +44,28 @@ dom.noteContents.delegate('click', 'li', function() {
 var cur;
 
 var noveau = {
-    index: function(id) {
+    index: function(id, folder) {
         dom.output.classList.remove("hidden");
         var existing = document.querySelectorAll('[data-to="'+id+'"]');
+        var title = folder ? Tome[id].title.split(":")[1] : Tome[id].title;
         if (!existing.length) {
             var li = document.createElement('li');
             li.dataset.to = id;
-            li.textContent = Tome[id].title;
+            li.className = 'note';
+            li.textContent = title;
             li.draggable = true;
-            dom.noteContents.appendChild(li);
+            if (folder) {
+                folder.qs('ul').appendChild(li);
+                dom.noteContents.appendChild(folder);
+            } else {
+                dom.noteContents.appendChild(li);
+            }
         } else {
-            existing[0].textContent = Tome[id].title;
+            if (folder) {
+                folder.qs('ul').appendChild(existing[0]);
+                dom.noteContents.appendChild(folder);
+            }
+            existing[0].textContent = title;
         }
     },
     page: function() {
@@ -62,6 +73,20 @@ var noveau = {
         dom.noteTitle.value = dom.notePage.value = '';
         dom.noteTitle.focus();
         cur = dom.id();
+    },
+    folder: function(id) {
+        var title = Tome[id].title.split(":");
+        var folder = document.querySelector('[data-folder="'+title[0]+'"]');
+        
+        if (!folder) {
+            folder = document.createElement('li');
+            folder.className = 'note-folder';
+            folder.dataset.folder = folder.innerHTML = title[0];
+            folder.appendChild(document.createElement('ul'));
+        }
+        
+        noveau.index(id, folder);
+        
     }
 };
 
@@ -70,7 +95,10 @@ dom.output.listen('input', 1000).then(function() {
         title: dom.noteTitle.value,
         content: dom.notePage.value
     }
-    noveau.index(cur);
+    if (dom.noteTitle.value.split(":").length === 1)
+        noveau.index(cur);
+    else
+        noveau.folder(cur);
     localforage.setItem(cur, Tome[cur]);
 });
 
@@ -85,23 +113,19 @@ localforage.iterate(function(content, key) {
 }).then(function() {
     console.info('initialised');
     
-    localforage.length().then(dom.id);
-    
     localforage.getItem("order").then(function(order) {
-        order = order || [];
         order.forEach(function(id) {
-           noveau.index(id); 
+            var folder = Tome[id].title.split(":");
+            if (folder[1])
+                noveau.folder(id);
+            else
+                noveau.index(id); 
         });
+        
         var latest = document.querySelector('[data-to="'+localStorage["jsu.note.latest"]+'"]');
     latest && latest.click();
-    });
-    
-    nest.qs('.×', function(click) {
-        localforage.removeItem(cur);
-        document.querySelector('[data-to="'+cur+'"]').remove();
-        dom.noteTitle.value = dom.notePage.value = '';
-        delete dom.order[dom.order.indexOf(cur)];
-        localforage.removeItem("order");
+        
+        
     });
 });
 
@@ -128,8 +152,11 @@ window.listen('beforeunload', function() {
            if (Tome[id].title === dom.noteTitle.value)
                localStorage["jsu.note.latest"] = id;
     });
-    nest.qs('.notepad-contents li').forEach(function(note) {
-       dom.order.push(note.dataset.to);
+    var notes = nest.qs('.note');
+    notes = notes.forEach ? notes : [notes];
+    notes.forEach(function(note) {
+        console.log(note.dataset.to);
+        dom.order.push(note.dataset.to);
     });
     localforage.setItem("order", dom.order);
 })
@@ -159,4 +186,12 @@ nest.keys({
            dom.file.click();
        }
    }
+});
+
+nest.qs('.×', function(click) {
+    localforage.removeItem(cur);
+    document.querySelector('[data-to="'+cur+'"]').remove();
+    dom.noteTitle.value = dom.notePage.value = '';
+    delete dom.order[dom.order.indexOf(cur)];
+    localforage.removeItem("order");
 });

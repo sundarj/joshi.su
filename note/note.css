@@ -26,7 +26,7 @@ aside, output {
         margin: 0;
         padding: 0
     }
-        .notepad-contents li {
+        .note {
             margin: 1em 0;
             cursor: pointer;
             background: #f8f8f3;
