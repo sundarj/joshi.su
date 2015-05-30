@@ -177,7 +177,7 @@ dom.file.listen('change', function(e) {
         nest.each(Tome, function(id) {
             localforage.setItem(id, Tome[id], function() {
                 localforage.length().then(function(length) {
-                     if (length === Object.keys(Tome).length)
+                     if (length === Object.keys(Tome).length+1)
                          location.reload();
                 });
             }); 
