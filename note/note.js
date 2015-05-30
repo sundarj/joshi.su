@@ -46,26 +46,28 @@ var cur;
 var noveau = {
     index: function(id, folder) {
         dom.output.classList.remove("hidden");
-        var existing = document.querySelectorAll('[data-to="'+id+'"]');
+        var existing = document.querySelector('[data-to="'+id+'"]');
         var title = folder ? Tome[id].title.split(":")[1] : Tome[id].title;
-        if (!existing.length) {
+        if (!existing) {
             var li = document.createElement('li');
             li.dataset.to = id;
             li.className = 'note';
             li.textContent = title;
             li.draggable = true;
             if (folder) {
-                folder.qs('ul').appendChild(li);
+                folder.querySelector('ul').appendChild(li);
                 dom.noteContents.appendChild(folder);
             } else {
                 dom.noteContents.appendChild(li);
             }
         } else {
             if (folder) {
-                folder.qs('ul').appendChild(existing[0]);
+                var current = existing.parentElement.parentElement;
+                folder.querySelector('ul').appendChild(existing);
+                current.remove();
                 dom.noteContents.appendChild(folder);
             }
-            existing[0].textContent = title;
+            existing.textContent = title;
         }
     },
     page: function() {
@@ -99,6 +101,7 @@ dom.output.listen('input', 1000).then(function() {
         noveau.index(cur);
     else
         noveau.folder(cur);
+    
     localforage.setItem(cur, Tome[cur]);
 });
 
@@ -123,9 +126,7 @@ localforage.iterate(function(content, key) {
         });
         
         var latest = document.querySelector('[data-to="'+localStorage["jsu.note.latest"]+'"]');
-    latest && latest.click();
-        
-        
+        latest && latest.click();
     });
 });
 
@@ -155,7 +156,6 @@ window.listen('beforeunload', function() {
     var notes = nest.qs('.note');
     notes = notes.forEach ? notes : [notes];
     notes.forEach(function(note) {
-        console.log(note.dataset.to);
         dom.order.push(note.dataset.to);
     });
     localforage.setItem("order", dom.order);
@@ -178,19 +178,25 @@ dom.file.listen('change', function(e) {
 });
 
 nest.keys({
-   ctrl: {
-       s: function() {
-            saveAs(new Blob([JSON.stringify(Tome)], {type: 'application/json,charset=utf-8'}), 'notes.json');
-       },
-       o: function() {
-           dom.file.click();
-       }
-   }
+    ctrl: {
+       s: function() { saveAs(new Blob([JSON.stringify(Tome)], {type: 'application/json,charset=utf-8'}), 'notes.json') },
+       o: function() { dom.file.click() },
+       m: function() { dom.noteCreator.click() },
+       '.': function() { dom.noteDestroyer.click() }
+    },
+    shift: {
+        '¿': function() {
+            alert(2);   
+        }
+    }
 });
 
-nest.qs('.×', function(click) {
+dom.noteDestroyer.listen('click', function() {
     localforage.removeItem(cur);
     document.querySelector('[data-to="'+cur+'"]').remove();
+    var parentfolder = document.querySelector("[data-folder='fn']".replace('fn', dom.noteTitle.value.split(":")[0]));
+    if (parentfolder && (!parentfolder.qs('ul').children.length))
+        parentfolder.remove();
     dom.noteTitle.value = dom.notePage.value = '';
     delete dom.order[dom.order.indexOf(cur)];
     localforage.removeItem("order");
