@@ -15,6 +15,8 @@ var dom = {
     noteDestroyer: nest.qs('.×'),
     output: nest.qs('output'),
     file: nest.qs('.file-open'),
+    help: nest.qs('.helpme'),
+    helpBtn: nest.qs('.\\?'),
     id: function() {
         return (new Date * Math.random()).toString(36).replace(/\./g,'');
     },
@@ -64,7 +66,7 @@ var noveau = {
             if (folder) {
                 var current = existing.parentElement.parentElement;
                 folder.querySelector('ul').appendChild(existing);
-                current.remove();
+                current.className === 'note-folder' && current.remove();
                 dom.noteContents.appendChild(folder);
             }
             existing.textContent = title;
@@ -92,7 +94,7 @@ var noveau = {
     }
 };
 
-dom.output.listen('input', 1000).then(function() {
+dom.output.listen('input', 1000).then(function(e) {
     Tome[cur] = {
         title: dom.noteTitle.value,
         content: dom.notePage.value
@@ -104,6 +106,11 @@ dom.output.listen('input', 1000).then(function() {
     
     localforage.setItem(cur, Tome[cur]);
 });
+
+    dom.noteTitle.listen('keyup', function(e) {
+       if (e.which === 13)
+           dom.notePage.focus();
+    });
 
 dom.noteCreator.listen('click', noveau.page);
 
@@ -117,6 +124,8 @@ localforage.iterate(function(content, key) {
     console.info('initialised');
     
     localforage.getItem("order").then(function(order) {
+        if (!order.length && Object.keys(Tome).length)
+            order = Object.keys(Tome);
         order.forEach(function(id) {
             var folder = Tome[id].title.split(":");
             if (folder[1])
@@ -186,10 +195,12 @@ nest.keys({
     },
     shift: {
         '¿': function() {
-            alert(2);   
+            dom.helpBtn.click(); 
         }
     }
 });
+
+dom.helpBtn.listen('click', function() { dom.help.classList.toggle('shown') });
 
 dom.noteDestroyer.listen('click', function() {
     localforage.removeItem(cur);

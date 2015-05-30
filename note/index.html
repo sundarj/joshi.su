@@ -16,12 +16,43 @@
         </aside><output class="hidden">
             <input type="text" class="note-title">
             <textarea class="note-page" spellcheck="false"></textarea>
-            <button class="×">×</button>
         </output>
         
     </main>
     
+    <aside class="helpme">
+        
+        <div class="helpme-container">
+            <h1>What?</h1>
+            
+            <p>When you click the <span class="creator-icon">+</span>, you'll be given an opportunity to enter a title. This will create a note. </p>
+            <p>Prepending the note title with a word followed by a colon (ie. 'foo:') will create a folder for that note, and any future notes with that prefix will also be added to that folder.</p>
+            
+            <dl class="keys">
+                <h3>Keyboard shortcuts:</h3>
+                
+                <dt><kbd>?</kbd></dt>
+                <dd>show this help</dd>
+                
+                <dt><kbd>ctrl</kbd><kbd>s</kbd></dt>
+                <dd>export to notes.json</dd>
+                
+                <dt><kbd>ctrl</kbd><kbd>o</kbd></dt>
+                <dd>import from notes.json</dd>
+                
+                <dt><kbd>ctrl</kbd><kbd>m</kbd></dt>
+                <dd>create a new note</dd>
+                
+                <dt><kbd>ctrl</kbd><kbd>del</kbd></dt>
+                <dd>delete current note</dd>
+            </dl>
+        </div>
+        
+    </aside>
+    
     <input accept=".json" class="file-open" type="file" style="display: none">
+    <button class="×">×</button>
+    <button class="?">?</button>
     
     <script src="/nest.js"></script>
     <script src="saveas.js"></script>

@@ -149,6 +149,10 @@
             shift: function(key) {
                 mod = 'shiftKey';
                 return upon(key);
+            },
+            raw: function(key) {
+                mod = 'which';
+                return upon(key);
             }
         };
 

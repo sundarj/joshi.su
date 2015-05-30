@@ -1,6 +1,12 @@
 body {
     background: #f8f8f3;
     overflow: hidden;
+    position: absolute;
+    top: 5px;
+    bottom: 5px;
+    left: 5px;
+    right: 5px;
+    margin: auto;
 }
 
 output, .notepad *, output * {
@@ -9,9 +15,7 @@ output, .notepad *, output * {
 
 main { position: absolute; height: 100%; width: 100% }
 
-aside, output { 
-    display: inline-block;
-    vertical-align: top;
+.notepad, output { 
     min-height: 100%;
     padding: 2em 3em;
 }
@@ -21,6 +25,11 @@ aside, output {
     width: 33.33333%;
     background: #f2f2e8;
     text-shadow: 0px 0px 1px rgba(0,0,0,0.3);
+    position: fixed;
+    min-height: 0;
+    top: 0;
+    bottom: 0;
+    overflow-y: scroll;
 }
 
     .notepad-contents {
@@ -58,6 +67,9 @@ output {
     font-size: 1.3em;
     position: relative;
     width: 66.66666%;
+    position: absolute;
+    top: 0;
+    right: 0;
 }
 
     .note-page, .note-title {
@@ -88,22 +100,78 @@ output {
         margin-top: 1em;
     }
 
-    .× {
+    .×, .\? {
         color: #9fafaf;
         position: absolute;
         top: .5em;
         right: .5em;
     }
-        .×:hover {
+        .×:hover, .\?:hover {
             color: #1f1f1f;   
         }
 
+    .\? {
+        top: .75em;
+        left: .5em;
+        font-size: .8em;
+    }
+
 .hidden * { display: none }
 
-.creator {
+.creator, .creator-icon {
     background: #3f3f3f;
     color: #f2f2e8;
     padding: .25em .5em;
+    border-radius: 2px;
+}
+
+.helpme {
+    position: fixed;
+    right: 2em;
+    bottom: 2em;
+    margin: auto;
+    width: 25em;
+    display: table;
+    padding: 1em;
+    background: rgba(207, 223, 223, .96);
+    box-shadow: 0px 0px 3px 1px rgba(0,0,0,0.4);
+    opacity: 0;
+    -webkit-transition: opacity .5s;
+    font-size: .85em;
+    pointer-events: none;
+}
+    .shown { opacity: 1 }
+    .helpme-container {
+        display: table-cell;
+        vertical-align: middle;
+    }
+    .creator-icon { font-size: .6em }
+    .keys dd { margin: .5em 1em }
+    .helpme h1 { margin-top: 0 }
+
+    kbd { /* shamelessly ripped from SO */
+        padding: .1em .6em;
+        border: 1px solid #ccc;
+        font-size: 11px;
+        font-family: Arial,Helvetica,sans-serif;
+        background-color: #f7f7f7;
+        box-shadow: 0 1px 0 rgba(0,0,0,0.2),0 0 0 2px #fff inset;
+        border-radius: 3px;
+        display: inline-block;
+        margin: 0 .1em;
+        text-shadow: 0 1px 0 #fff;
+        line-height: 1.4;
+        white-space: nowrap;
+    }
+
+
+::-webkit-scrollbar {
+    width: .4em;
+}
+
+::-webkit-scrollbar-thumb {
+    background: rgba(0,0,0,0.2);
+    border-radius: 4px;
 }
 
 @media screen and (max-width: 1000px) {
