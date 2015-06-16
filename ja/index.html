@@ -38,9 +38,9 @@
         
             #kana ul { list-style: none; text-align: center }
             #kana li { display: inline-block; width: 25%; margin: 10px }
-                #kana li b, #kata:checked + div .kana-box li { visibility: hidden}
-                #kata:checked + div .kana-box li b, #kata:checked + div .moto li span { visibility: visible !important }
-                #romaji:checked +div .kana-box li span { visibility: hidden }
+                #kana li b, #kata:checked ~ div .kana-box li { visibility: hidden}
+                #kata:checked ~ div .kana-box li b, #kata:checked + div .moto li span { visibility: visible !important }
+                #romaji:checked ~ div .kana-box li span { visibility: hidden }
         
             #kana ul.full li {width: 100%}
         
