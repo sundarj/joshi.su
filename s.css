@@ -1,8 +1,7 @@
 @import url(http://fonts.googleapis.com/css?family=Cutive+Mono);
 
-main {
-    padding: 10%;
-}
+main { padding: 15% 10% }
+
 .wrought a {
     color: inherit;
     text-decoration: none;
@@ -34,27 +33,6 @@ main hr {
     border-bottom-color: black;
     width: 25%;
 }
-
-.view {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    transform: scale(.5);
-    opacity: 0;
-    z-index: -1;
-    background: #f2f2e8;
-    margin-top: 128px;
-}
-
-.view.is {
-    transform: scale(1);
-    opacity: 1;
-    z-index: 2;
-    transition: transform .2s;
-}
-
 
 
 

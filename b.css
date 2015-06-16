@@ -7,13 +7,13 @@ html { box-sizing: border-box; height: 100% }
 
 body {
     font: normal 100%/1.4 'Noto Serif', Georgia, serif;
-    background: #f2f2e8;
+    background: #f7f7f7;
     color: #1f1f1f;
     min-height: 100%;
 }
 
 .site-head {
-    background: url(i/jsu.svg) no-repeat 1em 1em;
+    background: url(i/jsu.svg) no-repeat 64px 64px;
     background-size: 64px;
     width: 128px;
     height: 128px;

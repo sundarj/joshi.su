@@ -124,6 +124,7 @@ localforage.iterate(function(content, key) {
     console.info('initialised');
     
     localforage.getItem("order").then(function(order) {
+        order = order || [];
         if (!order.length && Object.keys(Tome).length)
             order = Object.keys(Tome);
         order.forEach(function(id) {
