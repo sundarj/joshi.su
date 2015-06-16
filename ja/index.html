@@ -38,8 +38,9 @@
         
             #kana ul { list-style: none; text-align: center }
             #kana li { display: inline-block; width: 25%; margin: 10px }
-                #kana li b, #kata:checked + div .moto li { visibility: hidden}
-                #kata:checked + div .moto li b, #kata:checked + div .moto li span { visibility: visible !important }
+                #kana li b, #kata:checked + div .kana-box li { visibility: hidden}
+                #kata:checked + div .kana-box li b, #kata:checked + div .moto li span { visibility: visible !important }
+                #romaji:checked +div .kana-box li span { visibility: hidden }
         
             #kana ul.full li {width: 100%}
         
@@ -155,6 +156,7 @@
             </header>
             
             Katakana? <input type="checkbox" id="kata" title="show Katakana">
+            Hide romaji (latin characters) <input type="checkbox" id="romaji" title="Hide romaji">
         
             <div>
 
@@ -224,7 +226,6 @@
                             <p>一: used to stretch out the preceding kana (メエル (email)&rarr;メール)</p>
 
                     </ul>
-                </div>
 
                     <ul class="kana-box">
 
