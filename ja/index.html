@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8">
     <title>日本語</title>
-    <link href='http://fonts.googleapis.com/css?family=Noto+Sans:400,700,400italic' rel='stylesheet' type='text/css'>
+    <link href='http://fonts.googleapis.com/css?family=Noto+Sans:400,700' rel='stylesheet' type='text/css'>
     <style>
         
             html { box-sizing: border-box }
@@ -38,9 +38,13 @@
         
             #kana ul { list-style: none; text-align: center }
             #kana li { display: inline-block; width: 25%; margin: 10px }
-                #kana li b, #kata:checked ~ div .kana-box li { visibility: hidden}
-                #kata:checked ~ div .kana-box li b, #kata:checked + div .moto li span { visibility: visible !important }
-                #romaji:checked ~ div .kana-box li span { visibility: hidden }
+                #kana li b, .katakana,
+                #kata:checked ~ div .kana-box i,
+                #kata:checked ~ div .hiragana,
+                #romaji:checked ~ div .kana-box li span{ opacity: 0; position: absolute; transition: opacity .3s; left: -999em }
+                #kata:checked ~ div .kana-box li b, #kata:checked ~ div .katakana { opacity: 1; position: static }
+                 { visibility: hidden }
+                i { font-weight: bold; font-style: normal }
         
             #kana ul.full li {width: 100%}
         
@@ -160,131 +164,152 @@
         
             <div>
 
-                    <ul class="kana-box moto">
+                <ul class="kana-box moto">
 
-                            <li>わ<b>ワ</b><span> wa</span></li>
-                            <li>は<b>ハ</b><span> ha (wa)</span></li>
-                            <li>た<b>タ</b><span> ta</span></li>
-                            <li>し<b>シ</b><span> shi</span></li>
-                            <li>の<b>ノ</b><span> no</span></li>
-                            <li>す<b>ス</b><span> su</span></li>
-                            <li>つ<b>ツ</b><span> tsu</span></li>
-                            <li>か<b>カ</b><span> ka</span></li>
-                            <li>れ<b>レ</b><span> re</span></li>
-                            <li>ふ<b>フ</b><span> fu</span></li>
-                            <li>あ<b>ア</b><span> a</span></li>
-                            <li>ん<b>ン</b><span> n</span></li>
-                            <li>な<b>ナ</b><span> na</span></li>
-                            <li>き<b>キ</b><span> ki</span></li>
-                            <li>ま<b>マ</b><span> ma</span></li>
-                            <li>い<b>イ</b><span> i</span></li>
-                            <li>も<b>モ</b><span> mo</span></li>
-                            <li>う<b>ウ</b><span> u</span></li>
-                            <li>え<b>エ</b><span> e</span></li>
-                            <li>く<b>ク</b><span> ku</span></li>
-                            <li>て<b>テ</b><span> te</span></li>
-                            <li>を<b>ヲ</b><span> wo</span></li>
-                            <li>お<b>オ</b><span> o</span></li>
-                            <li>り<b>リ</b><span> ri</span></li>
-                            <li>ひ<b>ヒ</b><span> hi</span></li>
-                            <li>と<b>ト</b><span> to</span></li>
-                            <li>こ<b>コ</b><span> ko</span></li>
-                            <li>よ<b>ヨ</b><span> yo</span></li>
-                            <li>せ<b>セ</b><span> se</span></li>
-                            <li>ら<b>ラ</b><span> ra</span></li>
-                            <li>そ<b>ソ</b><span> so</span></li>
-                            <li>み<b>ミ</b><span> mi</span></li>
-                            <li>む<b>ム</b><span> mu</span></li>
-                            <li>さ<b>サ</b><span> sa</span></li>
-                            <li>ろ<b>ロ</b><span> ro</span></li>
-                            <li>る<b>ル</b><span> ru</span></li>
-                            <li>ち<b>チ</b><span> chi</span></li>
-                            <li>に<b>ニ</b><span> ni</span></li>
-                            <li>ゆ<b>ユ</b><span> yu</span></li>
-                            <li>め<b>メ</b><span> me</span></li>
-                            <li>ね<b>ネ</b><span> ne</span></li>
-                            <li>ぬ<b>ヌ</b><span> nu</span></li>
-                            <li>ほ<b>ホ</b><span> ho</span></li>
-                            <li>へ<b>ヘ</b><span> he</span></li>
-                            <li>け<b>ケ</b><span> ke</span></li>
-                            <li>や<b>ヤ</b><span> ya</span></li>
+                    <li><i>わ</i><b>ワ</b><span> wa</span></li>
+                    <li><i>は</i><b>ハ</b><span> ha (wa)</span></li>
+                    <li><i>た</i><b>タ</b><span> ta</span></li>
+                    <li><i>し</i><b>シ</b><span> shi</span></li>
+                    <li><i>の</i><b>ノ</b><span> no</span></li>
+                    <li><i>す</i><b>ス</b><span> su</span></li>
+                    <li><i>つ</i><b>ツ</b><span> tsu</span></li>
+                    <li><i>か</i><b>カ</b><span> ka</span></li>
+                    <li><i>れ</i><b>レ</b><span> re</span></li>
+                    <li><i>ふ</i><b>フ</b><span> fu</span></li>
+                    <li><i>あ</i><b>ア</b><span> a</span></li>
+                    <li><i>ん</i><b>ン</b><span> n</span></li>
+                    <li><i>な</i><b>ナ</b><span> na</span></li>
+                    <li><i>き</i><b>キ</b><span> ki</span></li>
+                    <li><i>ま</i><b>マ</b><span> ma</span></li>
+                    <li><i>い</i><b>イ</b><span> i</span></li>
+                    <li><i>も</i><b>モ</b><span> mo</span></li>
+                    <li><i>う</i><b>ウ</b><span> u</span></li>
+                    <li><i>え</i><b>エ</b><span> e</span></li>
+                    <li><i>く</i><b>ク</b><span> ku</span></li>
+                    <li><i>て</i><b>テ</b><span> te</span></li>
+                    <li><i>を</i><b>ヲ</b><span> wo</span></li>
+                    <li><i>お</i><b>オ</b><span> o</span></li>
+                    <li><i>り</i><b>リ</b><span> ri</span></li>
+                    <li><i>ひ</i><b>ヒ</b><span> hi</span></li>
+                    <li><i>と</i><b>ト</b><span> to</span></li>
+                    <li><i>こ</i><b>コ</b><span> ko</span></li>
+                    <li><i>よ</i><b>ヨ</b><span> yo</span></li>
+                    <li><i>せ</i><b>セ</b><span> se</span></li>
+                    <li><i>ら</i><b>ラ</b><span> ra</span></li>
+                    <li><i>そ</i><b>ソ</b><span> so</span></li>
+                    <li><i>み</i><b>ミ</b><span> mi</span></li>
+                    <li><i>む</i><b>ム</b><span> mu</span></li>
+                    <li><i>さ</i><b>サ</b><span> sa</span></li>
+                    <li><i>ろ</i><b>ロ</b><span> ro</span></li>
+                    <li><i>る</i><b>ル</b><span> ru</span></li>
+                    <li><i>ち</i><b>チ</b><span> chi</span></li>
+                    <li><i>に</i><b>ニ</b><span> ni</span></li>
+                    <li><i>ゆ</i><b>ユ</b><span> yu</span></li>
+                    <li><i>め</i><b>メ</b><span> me</span></li>
+                    <li><i>ね</i><b>ネ</b><span> ne</span></li>
+                    <li><i>ぬ</i><b>ヌ</b><span> nu</span></li>
+                    <li><i>ほ</i><b>ホ</b><span> ho</span></li>
+                    <li><i>へ</i><b>ヘ</b><span> he</span></li>
+                    <li><i>け</i><b>ケ</b><span> ke</span></li>
+                    <li><i>や</i><b>ヤ</b><span> ya</span></li>
 
-                            <p>when a kana has a dakuten added to it (like か&raquo;が), it gets voiced, and the sound changes slightly. The following changes occur:</p>
-                            <ul class="full">
-                                <li>k&raquo;g (ka becomes ga)</li>
-                                <li>ts&raquo;dz (tsu becomes dzu, pronounced zu)</li>
-                                <li>t&raquo;d (te becomes de)</li>
-                                <li>h&raquo;b (ho becomes bo)</li>
-                                <li>ch/sh&raquo; (shi and chi become ji)</p>
-                            </ul>
+                    <p>when a kana has a dakuten added to it (like か&raquo;が), it gets voiced, and the sound changes slightly. The following changes occur:</p>
+                    <ul class="full">
+                        <li>k&raquo;g (ka becomes ga)</li>
+                        <li>ts&raquo;dz (tsu becomes dzu, pronounced zu)</li>
+                        <li>t&raquo;d (te becomes de)</li>
+                        <li>h&raquo;b (ho becomes bo)</li>
+                        <li>ch/sh&raquo; (shi and chi become ji)</p>
+                    </ul>
+
+                    <p>with a handakuten (は&raquo;ぱ), h becomes p (ha becomes pa)</p>
+                    <p>small ゃゅょ: added to kana ending in -i, truncates sound (きゃ&raquo;kya, not kiya)</p>
+                    <p>small ぃ: used to form sounds foreign to Japanese, such as ふぃ, fi.<p>
+                    <p>small っ: indicates that the following consonant is doubled&mdash;さか:saka, さっか:sakka</p>
+                    <p>ゝ/ヽ/々&rarr;hiragana, katatakana, kanji, repetition marks, respectively (佐々木&rarr;sasaki)</p>
+                    <p>一: used to stretch out the preceding kana (メエル (email)&rarr;メール)</p>
+
+                    </ul>
+
+                    <ul class="kana-box full hiragana">
+
+                        <li title="I; me">わたし<span> watashi</span></li>
+                        <li title="you">あなた<span> anata</span></li>
+                        <li title="yes">はい<span> hai</span></li>
+                        <li title="no">いいえ<span> iie</span></li>
+                        <li title="doing">している<span> shiteiru</span></li>
+                        <li title="he">かれ<span> kare</span></li>
+                        <li title="be?; is?">ですか<span> desuka</span></li>
+                        <li title="health; to be well">げんき<span> genki</span></li>
+                        <li title="strong; powerful; intense">つよい<span> tsuyoi</span></li>
+                        <li title="colour">いろ<span> iro</span></li>
+                        <li title="hello">こんにちわ<span> konnichiwa</span></li>
+                        <li title="amazing; awesome; great; super">すごい<span> sugoi</span></li>
+
+                    </ul>
             
-                            <p>with a handakuten (は&raquo;ぱ), h becomes p (ha becomes pa)</p>
-                            <p>small ゃゅょ: added to kana ending in -i, truncates sound (きゃ&raquo;kya, not kiya)</p>
-                            <p>small ぃ: used to form sounds foreign to Japanese, such as ふぃ, fi.<p>
-                            <p>small っ: indicates that the following consonant is doubled&mdash;さか:saka, さっか:sakka</p>
-                            <p>ゝ/ヽ/々&rarr;hiragana, katatakana, kanji, repetition marks, respectively (佐々木&rarr;sasaki)</p>
-                            <p>一: used to stretch out the preceding kana (メエル (email)&rarr;メール)</p>
+                    <ul class="kana-box full katakana">
+                        
+                        <li title="shrimp">エビ　<span>ebi</span></li>
+                        <li title="lewd">エッチ　<span>ecchi</span></li>
+                        <li title="banana">バナナ　<span>banana</span></li>
+                        <li title="dont sweat it">ドンマイ　<span>donmai</span></li>
+                        <li title="file">ファイル　<span>file</span></li>
+                        <li title="part-time job (from German arbeit)">バイト　<span>baito</span></li>
+                        <li title="taxi">タクシー　<span>takushii (takushi-)</span></li>
+                        
+                    </ul>
+
+                    <ul class="kana-box full hiragana">
+                        <li title="i/ro/ha/ni/ho/he/to">いろはにほへと</li>
+                        <li title="chi/ri/nu/ru/wo">ちりぬるを</li>
+                        <li title="wa/ka/yo/ta/re/so">わかよたれそ</li>
+                        <li title="tsu/ne/na/ra/mu">つねならむ</li>
+                        <li title="u//no/o/ku/ya/ma">う(ゐ)のおくやま</li>
+                        <li title="ke/fu/ko/e/te">けふこえて</li>
+                        <li title="a/sa/ki/yu/me/mi/shi">あさきゆめみし</li>
+                        <li title="//hi/mo/se/su">(ゑ)ひもせす</li>
 
                     </ul>
 
-                    <ul class="kana-box">
-
-                            <li title="I;me">わたし<span> watashi</span></li>
-                            <li title="you">あなた<span> anata</span></li>
-                            <li title="yes">はい<span> hai</span></li>
-                            <li title="no">いいえ<span> iie</span></li>
-                            <li title="doing">している<span> shiteiru</span></li>
-                            <li title="he">かれ<span> kare</span></li>
-                            <li title="be?; is?">ですか<span> desuka</span></li>
-                            <li title="health; to be well">げんき<span> genki</span></li>
-                            <li title="strong; powerful; intense">つよい<span> tsuyoi</span></li>
-                            <li title="colour(ed)">いろ<span> iro</span></li>
-                            <li title="hello">こんにちわ<span> konnichiwa</span></li>
-                            <li title="amazing; awesome; great; super">すごい<span> sugoi</span></li>
+                    <ul class="kana-box full hiragana">
+                        
+                        <li title="good morning">おはようございます <span>ohayou gozaimasu</span></li>
+                        <li title="hello">こんばんは <span>konbanwa</span></li>
+                        <li title="how are you?">おげんきですか <span>ogenki desuka</span></li>
+                        <li title="thank you">ありがとう <span>arigatou</span></li>
+                        <li title="don't mention it">どういたしまして。<span>douitashimashite</span></li>
+                        <li title="terribly sorry; excuse me">すみません <span>sumimasen</span></li>
+                        <li title="sorry">ごめんなさい。<span>gomennasai</span></li>
+                        <li title="you can do it!; go for it!; good luck!">がんばって(ね) <span>ganbatte (ne)</span></li>
 
                     </ul>
-
-                    <ul class="kana-box">
-                            <li title="i/ro/ha/ni/ho/he/to">いろはにほへと</li>
-                            <li title="chi/ri/nu/ru/wo">ちりぬるを</li>
-                            <li title="wa/ka/yo/ta/re/so">わかよたれそ</li>
-                            <li title="tsu/ne/na/ra/mu">つねならむ</li>
-                            <li title="u//no/o/ku/ya/ma">う(ゐ)のおくやま</li>
-                            <li title="ke/fu/ko/e/te">けふこえて</li>
-                            <li title="a/sa/ki/yu/me/mi/shi">あさきゆめみし</li>
-                            <li title="//hi/mo/se/su">(ゑ)ひもせす</li>
-
-                    </ul>
-
-                    <ul class="kana-box">
-                            <li title="ohayou gozaimasu">おはようございます</li>
-                            <li title="konbanwa">こんばんは</li>
-                            <li title="ogenki desuka">おげんきですか</li>
-                            <li title="arigatou">ありがとう</li>
-                            <li title="douitashimashite">どういたしまして。</li>
-                            <li title="sumimasen">すみません</li>
-                            <li title="gomennasai">ごめんなさい。</li>
-                            <li title="ganbatte (ne)">がんばって(ね)</li>
-
+            
+                    <ul class="kana-box full katakana">
+                        <li title="good luck">グッド・ラック <span>guddo rakku</span></li>
+                        <li title="lucky!">ラッキー <span>rakkii (rakki-)</span></li>
+                        <li title="go for it!; i believe in you!; fight!">ファイト <span>faito</span></li>
+                        <li title="no problem">ノー・プロブレム <span>noo (no-) puroburemu</span></li>
                     </ul>
 
                     <ul class="kana-box new">
-                            <h4 style="margin-left: 4px">Click for new kana. Hover for name:</h4>
-                            <p class="rand"></p>
+                        <h4 style="margin-left: 4px">Click for new kana. Hover for name:</h4>
+                        <p class="rand"></p>
                     </ul>
                 
             </div>
     
             <script>
     
-                var hira = [].slice.call(document.querySelectorAll('.moto li'));
-                var kata = [].slice.call(document.querySelectorAll('.moto li b'));
+                var hira = [].slice.call(document.querySelectorAll('.moto > li'));
+                var kata = [].slice.call(document.querySelectorAll('.moto > li b'));
                 var randomk = document.querySelector('.rand');
                 
                 function get_random_kana() {
                     var Kana = document.querySelector('#kata').checked ? 'kata' : 'hira';
                     var luckyKana = window[Kana][~~(Math.random() * window[Kana].length)];
                     randomk.innerHTML = luckyKana.textContent[0];
+                    console.log(luckyKana, kana);
                     luckyKana = Kana === 'hira' ? luckyKana.querySelector('span').textContent : luckyKana.nextSibling.textContent;
                     randomk.title = luckyKana;
                 }
