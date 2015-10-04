@@ -1,0 +1,19 @@
+@import "../b.css";
+
+body {
+    padding: 2em;
+}
+
+header {
+    padding: 2.5%;
+}
+
+ul {
+    list-style: none;
+}
+
+.task-reqs > li {
+    padding: 1em 0;
+}
+
+.can-get::after { content: ' (can get during tasks)' }
