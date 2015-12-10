@@ -3,3 +3,5 @@
 !/.gitignore
 node_modules
 npm-debug.log
+typings
+jsconfig.json

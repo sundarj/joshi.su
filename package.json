@@ -1,0 +1,26 @@
+{
+  "name": "jsu",
+  "version": "1.0.0",
+  "description": "joshi.su",
+  "main": "index.js",
+  "scripts": {
+    "start": "supervisor index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/sundarj/jsu.git"
+  },
+  "author": "",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/sundarj/jsu/issues"
+  },
+  "homepage": "https://github.com/sundarj/jsu#readme",
+  "dependencies": {
+    "koa": "^1.1.2",
+    "koa-rewrite": "^1.1.1",
+    "koa-static": "^1.5.2",
+    "koa-views": "^3.1.0",
+    "toffee": "^0.1.12"
+  }
+}
