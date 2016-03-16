@@ -1,31 +1,27 @@
-const Koa = require('koa');
-const app = new Koa();
-const path = require('path');
-const view = require('koa-views');
-const rewrite = require('koa-rewrite');
+'use strict'
 
-app.use(view('exports', {
-    map: {
-        html: 'toffee'
-    }
-}));
+global.setting = Object.assign(require('./package.json').config, {
+  root: __dirname,
+})
 
-app.use( rewrite(/\/use\/([^/]+\.css)$/, '/use/sheets/$1') )
-app.use( rewrite(/\/use\/([^/]+\.js)$/, '/use/scripts/$1') )
-app.use( rewrite(/\/use\/([^/]+\.png)$/, '/use/images/$1') )
+const Hapi = require('hapi')
 
-app.use(function* (next) {
-    const template = (this.req.url.slice(1) || 'index') + '.json';
-    const templatePath = path.join( __dirname, 'exports/template/' );
+const server = new Hapi.Server()
+server.connection({ port: 8080 })
+
+const routes = require('require-all')(`${__dirname}/routes`)
+
+server.register(require('inert'), err => {
+  
+  if (err) throw err
+  
+  server.route(routes.api)
+  server.route(routes.static)
+  
+  server.start(err => {
     
-    try {
-        this.state = require( templatePath + template );
-        yield this.render( 'index' ); 
-    } catch(e) {
-        yield next;
-    }  
-});
-
-app.use( require('koa-static')('exports') );
-
-app.listen(1337);
+    if (err) throw err
+    
+    console.log(`server listening on ${server.info.uri}`)
+  })
+})
