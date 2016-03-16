@@ -1,10 +1,16 @@
 {
-  "name": "jsu",
+  "name": "@j.su/joshi.su",
   "version": "1.0.0",
   "description": "joshi.su",
   "main": "index.js",
   "scripts": {
-    "start": "supervisor index.js"
+    "build:css": "cleancss < exports/sheets/fonts.css > exports/sheets/fonts.styl",
+    "build:styl": "stylus -c exports/sheets/bundle.styl -p > exports/sheets/bundle.css",
+    "build": "npm run build:css; npm run build:styl",
+    "prewatch": "npm run build",
+    "watch": "wr 'npm run build' exports/sheets",
+    "pretest": "node . &",
+    "test": "tap test; pkill node"
   },
   "repository": {
     "type": "git",
@@ -17,10 +23,23 @@
   },
   "homepage": "https://github.com/sundarj/jsu#readme",
   "dependencies": {
-    "koa": "^1.1.2",
-    "koa-rewrite": "^1.1.1",
-    "koa-static": "^1.5.2",
-    "koa-views": "^3.1.0",
-    "toffee": "^0.1.12"
+    "accept-language": "^2.0.16",
+    "hapi": "^13.0.0",
+    "inert": "^3.2.0",
+    "require-all": "^2.0.0"
+  },
+  "devDependencies": {
+    "clean-css": "^3.4.9",
+    "node-fetch": "^1.3.3",
+    "stylus": "^0.53.0",
+    "tap": "^5.7.0",
+    "uglify": "^0.1.5",
+    "wr": "^1.3.1"
+  },
+  "config": {
+    "languages": [
+      "en",
+      "ja"
+    ]
   }
 }
