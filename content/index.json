@@ -1,0 +1,23 @@
+{
+  
+  "en": {
+    
+    "projects": {
+      "hibiku": "hibiku",
+      "soft": "soft",
+      "nota": "nota",
+      "this": "this"
+    }
+  },
+  
+  "ja": {
+    
+    "projects": {
+      "hibiku": "ひびく",
+      "soft": "",
+      "nota": "ノート",
+      "this": "これ"
+    }
+  }
+
+}
