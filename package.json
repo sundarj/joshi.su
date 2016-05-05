@@ -4,6 +4,7 @@
   "description": "joshi.su",
   "main": "index.js",
   "scripts": {
+    "start": "node .",
     "build:css": "stylus -c exports/use/sheets/bundle.styl",
     "watch:css": "npm run build:css -- -w",
     "build": "npm run build:css",
@@ -21,8 +22,8 @@
   },
   "homepage": "https://github.com/sundarj/jsu#readme",
   "dependencies": {
-    "accept-language": "^2.0.16",
     "hapi": "^13.0.0",
+    "hapi-accept-language": "^1.0.1",
     "inert": "^3.2.0",
     "require-all": "^2.0.0"
   },

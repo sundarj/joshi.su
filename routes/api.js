@@ -1,8 +1,5 @@
 'use strict'
 
-const Lang = require('accept-language')
-Lang.languages(setting.languages)
-
 module.exports = [
   
   {
@@ -10,7 +7,7 @@ module.exports = [
     path: '/api',
     handler(request, respondWith) {
       respondWith({
-        lang: Lang.get( request.headers['accept-language'] ),
+        lang: request.pre.language,
       })
     },
   },
