@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "start": "node .",
-    "build:css": "stylus -c --sourcemap-inline exports/use/sheets/bundle.styl",
+    "build:css": "stylus --sourcemap-inline exports/use/sheets/bundle.styl",
     "watch:css": "npm run build:css -- -w",
     "build": "npm run build:css",
     "pretest": "node . &",
