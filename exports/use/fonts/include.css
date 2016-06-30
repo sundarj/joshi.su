@@ -1,0 +1,16 @@
+@font-face {
+    font-family: 'Transport';
+    src: url('transport/transport_medium-webfont.woff2') format('woff2'),
+         url('transport/transport_medium-webfont.woff') format('woff');
+    font-weight: 400;
+    font-style: normal;
+
+}
+@font-face {
+    font-family: 'Transport';
+    src: url('transport/transport_heavy-webfont.woff2') format('woff2'),
+         url('transport/transport_heavy-webfont.woff') format('woff');
+    font-weight: 700;
+    font-style: normal;
+
+}
